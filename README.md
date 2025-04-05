@@ -30,7 +30,7 @@ A Telegram bot that authenticates users based on a whitelist, supports multiling
 /your-project
 ├── gpt.py              # Main bot script
 ├── db.py               # SQLite models & helpers
-├── translate.py     # Language strings (EN & FA)
+├── translate.py        # Language strings (EN & FA)
 ├── .env                # Environment variables
 ├── requirements.txt    # Python dependencies
 └── bot_data/           # SQLite DB stored here
