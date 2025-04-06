@@ -47,8 +47,12 @@ async def handle_contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = get_user(session, user_id)
 
     phone_number = contact.phone_number
+
     if phone_number.startswith("0"):
-        phone_number = "+49" + phone_number[1:]
+        phone_number = "+98" + phone_number[1:]
+    
+    if not phone_number.startswith("+") and phone_number.startswith("98"):
+        phone_number = "+" + phone_number
 
     if phone_number in WHITELIST_IDS:
         user.verified = True
@@ -63,7 +67,7 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
     user_id = update.effective_user.id
     text = update.message.text
     user = get_user(session, user_id)
-
+    
     if not user.verified:
         if "English" in text:
             user.language = "en"
@@ -74,6 +78,7 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
             return
 
         username = f"@{update.effective_user.username}" if update.effective_user.username else None
+        
         if username in WHITELIST_IDS:
             user.verified = True
             session.commit()
